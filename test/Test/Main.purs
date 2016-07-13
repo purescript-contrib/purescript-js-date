@@ -5,9 +5,12 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 
-import Data.Enum (toEnum)
-import Data.JSDate as JSD
 import Data.DateTime as DT
+import Data.Enum (toEnum)
+import Data.Either (isRight)
+import Data.Foreign (F, Foreign)
+import Data.Foreign.Class (read)
+import Data.JSDate as JSD
 import Data.Maybe (Maybe(..), fromJust)
 import Partial.Unsafe (unsafePartial)
 
@@ -15,8 +18,13 @@ import Global (nan)
 
 import Test.Assert (ASSERT, assert)
 
+foreign import myDate :: Foreign
+
 main :: forall eff. Eff (console :: CONSOLE, assert :: ASSERT, locale :: JSD.LOCALE | eff) Unit
 main = do
+
+  log "Check IsForeign intance will read JS date values..."
+  assert $ isRight $ read myDate :: F JSD.JSDate
 
   log "Checking that a UTC date constructed with sensible values is valid..."
   assert $ JSD.isValid $ JSD.jsdate defaultDateRecord

@@ -19,6 +19,8 @@ import Data.DateTime as DateTime
 import Data.DateTime.Instant (Instant)
 import Data.DateTime.Instant as Instant
 import Data.Enum (fromEnum)
+import Data.Foreign (unsafeReadTagged)
+import Data.Foreign.Class (class IsForeign)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Int (toNumber)
 import Data.Maybe (Maybe(..))
@@ -27,6 +29,9 @@ import Data.Time.Duration (Milliseconds(..))
 
 -- | The type of JavaScript `Date` objects.
 foreign import data JSDate :: *
+
+instance isForeignJSDate :: IsForeign JSDate where
+  read = unsafeReadTagged "Date"
 
 -- | Checks whether a date value is valid. When a date is invalid, the majority
 -- | of the functions return `NaN`, `"Invalid Date"`, or throw an exception.
