@@ -34,3 +34,9 @@ exports.dateMethodEff = function (method, date) {
     return date[method]();
   };
 };
+
+exports.parse = function (dateString) {
+  return function () {
+    return new Date(dateString);
+  };
+};
