@@ -38,6 +38,10 @@ main = do
   assert $ not $ JSD.isValid $ JSD.jsdate defaultDateRecord { second = nan }
   assert $ not $ JSD.isValid $ JSD.jsdate defaultDateRecord { millisecond = nan }
 
+  log "Checking that a date constructed from a string with sensible values is valid..."
+  assert <<< JSD.isValid =<< JSD.parse "2011-10-10T14:48:00"
+  assert <<< JSD.isValid =<< JSD.parse "Thu, 01 Jan 1970 00:00:00 GMT-0400"
+
   log "Checking that a local date constructed with sensible values is valid..."
   assert <<< JSD.isValid =<< JSD.jsdateLocal defaultDateRecord
 

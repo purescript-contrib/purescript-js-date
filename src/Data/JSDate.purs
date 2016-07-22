@@ -102,6 +102,16 @@ foreign import jsdateLocal
 foreign import dateMethodEff :: forall eff a. Fn2 String JSDate (Eff eff a)
 foreign import dateMethod :: forall a. Fn2 String JSDate a
 
+-- | Attempts to parse a date from a string. The behaviour of this function is
+-- | implementation specific until ES5, so may not always have the same
+-- | behaviour for a given string. The RFC2822 and ISO8601 date string formats
+-- | should parse consistently.
+-- |
+-- | The `LOCALE` effect is present here as if no time zone is specified in the
+-- | string the current locale's time zone will be used instead.
+foreign import parse
+  :: forall eff. String -> Eff (locale :: LOCALE | eff) JSDate
+
 -- | The effect type used when indicating the current machine's date/time locale
 -- | is used in computing a value.
 foreign import data LOCALE :: !
