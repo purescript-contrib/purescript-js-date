@@ -202,7 +202,7 @@ toDateString :: JSDate -> String
 toDateString dt = runFn2 dateMethod "toDateString" dt
 
 -- | Converts a date value to an ISO 8601 Extended format date string.
-toISOString :: forall eff. JSDate -> Eff (exception :: EXCEPTION | eff) String
+toISOString :: forall eff. JSDate -> Eff (err :: EXCEPTION | eff) String
 toISOString dt = runFn2 dateMethodEff "toISOString" dt
 
 -- | Returns a string representing for a date value.
