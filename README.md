@@ -1,8 +1,7 @@
 # purescript-js-date
 
-[![Latest release](http://img.shields.io/bower/v/purescript-js-date.svg)](https://github.com/purescript-contrib/purescript-js-date/releases)
+[![Latest release](http://img.shields.io/github/release/purescript-contrib/purescript-js-date.svg)](https://github.com/purescript-contrib/purescript-js-date/releases)
 [![Build Status](https://travis-ci.org/purescript-contrib/purescript-js-date.svg?branch=master)](https://travis-ci.org/purescript-contrib/purescript-js-date)
-[![Dependency Status](https://www.versioneye.com/user/projects/5757543d7757a0003bd4b322/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5757543d7757a0003bd4b322)
 [![Maintainer: garyb](https://img.shields.io/badge/maintainer-garyb-lightgrey.svg)](http://github.com/garyb)
 
 JavaScript's native date type and corresponding functions.
