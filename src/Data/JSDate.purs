@@ -6,7 +6,42 @@
 -- | recommended that `DateTime` representation is used instead - `DateTime`
 -- | offers greater type safety, a more PureScript-friendly interface, and has
 -- | a `Generic` instance.
-module Data.JSDate where
+module Data.JSDate
+  ( JSDate
+  , LOCALE
+  , readDate
+  , isValid
+  , fromDateTime
+  , toDateTime
+  , toDate
+  , toInstant
+  , jsdate
+  , jsdateLocal
+  , parse
+  , getTime
+  , getUTCDate
+  , getUTCDay
+  , getUTCFullYear
+  , getUTCHours
+  , getUTCMilliseconds
+  , getUTCMinutes
+  , getUTCMonth
+  , getUTCSeconds
+  , getDate
+  , getDay
+  , getFullYear
+  , getHours
+  , getMilliseconds
+  , getMinutes
+  , getMonth
+  , getSeconds
+  , getTimezoneOffset
+  , toDateString
+  , toISOString
+  , toString
+  , toTimeString
+  , toUTCString
+  ) where
 
 import Prelude
 
@@ -29,6 +64,11 @@ import Data.Time.Duration (Milliseconds(..))
 -- | The type of JavaScript `Date` objects.
 foreign import data JSDate :: Type
 
+-- | The effect type used when indicating the current machine's date/time locale
+-- | is used in computing a value.
+foreign import data LOCALE :: Effect
+
+-- | Attempts to read a `Foreign` value as a `JSDate`.
 readDate :: Foreign -> F JSDate
 readDate = unsafeReadTagged "Date"
 
@@ -110,10 +150,6 @@ foreign import dateMethod :: forall a. Fn2 String JSDate a
 -- | string the current locale's time zone will be used instead.
 foreign import parse
   :: forall eff. String -> Eff (locale :: LOCALE | eff) JSDate
-
--- | The effect type used when indicating the current machine's date/time locale
--- | is used in computing a value.
-foreign import data LOCALE :: Effect
 
 -- | Returns the date as a number of milliseconds since 1970-01-01 00:00:00 UTC.
 getTime :: JSDate -> Number
