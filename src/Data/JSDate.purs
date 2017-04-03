@@ -10,7 +10,7 @@ module Data.JSDate where
 
 import Prelude
 
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (kind Effect, Eff)
 import Control.Monad.Eff.Exception (EXCEPTION)
 
 import Data.Date as Date
@@ -19,8 +19,7 @@ import Data.DateTime as DateTime
 import Data.DateTime.Instant (Instant)
 import Data.DateTime.Instant as Instant
 import Data.Enum (fromEnum)
-import Data.Foreign (unsafeReadTagged)
-import Data.Foreign.Class (class IsForeign)
+import Data.Foreign (F, Foreign, unsafeReadTagged)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Int (toNumber)
 import Data.Maybe (Maybe(..))
@@ -28,10 +27,10 @@ import Data.Time as Time
 import Data.Time.Duration (Milliseconds(..))
 
 -- | The type of JavaScript `Date` objects.
-foreign import data JSDate :: *
+foreign import data JSDate :: Type
 
-instance isForeignJSDate :: IsForeign JSDate where
-  read = unsafeReadTagged "Date"
+readDate :: Foreign -> F JSDate
+readDate = unsafeReadTagged "Date"
 
 -- | Checks whether a date value is valid. When a date is invalid, the majority
 -- | of the functions return `NaN`, `"Invalid Date"`, or throw an exception.
@@ -114,7 +113,7 @@ foreign import parse
 
 -- | The effect type used when indicating the current machine's date/time locale
 -- | is used in computing a value.
-foreign import data LOCALE :: !
+foreign import data LOCALE :: Effect
 
 -- | Returns the date as a number of milliseconds since 1970-01-01 00:00:00 UTC.
 getTime :: JSDate -> Number
