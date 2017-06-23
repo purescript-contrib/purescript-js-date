@@ -1,6 +1,22 @@
 /* global exports */
 "use strict";
 
+var createDate = function (y, m, d, h, mi, s, ms) {
+  var date = new Date(Date.UTC(y, m, d, h, mi, s, ms));
+  if (y >= 0 && y < 100) {
+    date.setUTCFullYear(y);
+  }
+  return date;
+};
+
+var createLocalDate = function (y, m, d, h, mi, s, ms) {
+  var date = new Date(y, m, d, h, mi, s, ms);
+  if (y >= 0 && y < 100) {
+    date.setFullYear(y);
+  }
+  return date;
+};
+
 exports.isValid = function (date) {
   return !isNaN(date.getTime());
 };
@@ -15,13 +31,12 @@ exports.toInstantImpl = function (just) {
 };
 
 exports.jsdate = function (parts) {
-  var t = Date.UTC(parts.year, parts.month, parts.day, parts.hour, parts.minute, parts.second, parts.millisecond);
-  return new Date(t);
+  return createDate(parts.year, parts.month, parts.day, parts.hour, parts.minute, parts.second, parts.millisecond);
 };
 
 exports.jsdateLocal = function (parts) {
   return function () {
-    return new Date(parts.year, parts.month, parts.day, parts.hour, parts.minute, parts.second, parts.millisecond);
+    return createLocalDate(parts.year, parts.month, parts.day, parts.hour, parts.minute, parts.second, parts.millisecond);
   };
 };
 

@@ -56,6 +56,7 @@ main = do
 
   log "Check that a roundtrip conversion of a dates results in the input"
   assert $ JSD.toDateTime (JSD.fromDateTime dateTime) == Just dateTime
+  assert $ JSD.toDateTime (JSD.fromDateTime ancientDateTime) == Just ancientDateTime
   assert $ JSD.toDateTime (JSD.fromDateTime bottom) == Just bottom
   assert $ JSD.toDateTime (JSD.fromDateTime top) == Just top
 
@@ -80,3 +81,8 @@ main = do
     DT.Time <$> toEnum 2 <*> toEnum 21 <*> toEnum 43 <*> toEnum 678
 
   dateTime = DT.DateTime date time
+
+  ancientDate = unsafePartial $ fromJust $
+    DT.canonicalDate <$> toEnum 1 <*> pure DT.January <*> toEnum 1
+
+  ancientDateTime = DT.DateTime ancientDate time
