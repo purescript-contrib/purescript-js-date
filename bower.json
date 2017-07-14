@@ -19,7 +19,8 @@
     "purescript-datetime": "^3.0.0",
     "purescript-exceptions": "^3.0.0",
     "purescript-foreign": "^4.0.0",
-    "purescript-integers": "^3.0.0"
+    "purescript-integers": "^3.0.0",
+    "purescript-now": "^3.0.0"
   },
   "devDependencies": {
     "purescript-assert": "^3.0.0",

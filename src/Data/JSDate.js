@@ -17,6 +17,10 @@ var createLocalDate = function (y, m, d, h, mi, s, ms) {
   return date;
 };
 
+exports.now = function () {
+  return new Date();
+};
+
 exports.isValid = function (date) {
   return !isNaN(date.getTime());
 };
@@ -28,6 +32,10 @@ exports.toInstantImpl = function (just) {
       return isNaN(t) ? nothing : just(t);
     };
   };
+};
+
+exports.fromInstant = function (instant) {
+  return new Date(instant);
 };
 
 exports.jsdate = function (parts) {

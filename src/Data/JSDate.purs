@@ -14,9 +14,11 @@ module Data.JSDate
   , fromDateTime
   , toDateTime
   , toDate
+  , fromInstant
   , toInstant
   , jsdate
   , jsdateLocal
+  , now
   , parse
   , getTime
   , getUTCDate
@@ -47,7 +49,7 @@ import Prelude
 
 import Control.Monad.Eff (kind Effect, Eff)
 import Control.Monad.Eff.Exception (EXCEPTION)
-
+import Control.Monad.Eff.Now (NOW)
 import Data.Date as Date
 import Data.DateTime (DateTime(..), Date)
 import Data.DateTime as DateTime
@@ -100,6 +102,9 @@ toDateTime = map Instant.toDateTime <$> toInstant
 toDate :: JSDate -> Maybe Date
 toDate = map DateTime.date <$> toDateTime
 
+-- | Creates a `JSDate` from an `Instant` value.
+foreign import fromInstant :: Instant -> JSDate
+
 -- | Attempts to construct an `Instant` for a `JSDate`. `Nothing` is returned
 -- | only when the date value is an invalid date.
 toInstant :: JSDate -> Maybe Instant
@@ -150,6 +155,13 @@ foreign import dateMethod :: forall a. Fn2 String JSDate a
 -- | string the current locale's time zone will be used instead.
 foreign import parse
   :: forall eff. String -> Eff (locale :: LOCALE | eff) JSDate
+
+-- | Gets a `JSDate` value for the date and time according to the current
+-- | machine's clock.
+-- |
+-- | Unless a `JSDate` is required specifically, consider using the functions in
+-- | `Control.Monad.Eff.Now` instead.
+foreign import now :: forall eff. Eff (now :: NOW | eff) JSDate
 
 -- | Returns the date as a number of milliseconds since 1970-01-01 00:00:00 UTC.
 getTime :: JSDate -> Number
