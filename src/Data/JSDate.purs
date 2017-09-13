@@ -57,6 +57,7 @@ import Data.DateTime.Instant (Instant)
 import Data.DateTime.Instant as Instant
 import Data.Enum (fromEnum)
 import Data.Foreign (F, Foreign, unsafeReadTagged)
+import Data.Foreign.Class (class Decode)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Int (toNumber)
 import Data.Maybe (Maybe(..))
@@ -73,6 +74,9 @@ foreign import data LOCALE :: Effect
 -- | Attempts to read a `Foreign` value as a `JSDate`.
 readDate :: Foreign -> F JSDate
 readDate = unsafeReadTagged "Date"
+
+instance decodeJSDate :: Decode JSDate where
+  decode = readDate
 
 -- | Checks whether a date value is valid. When a date is invalid, the majority
 -- | of the functions return `NaN`, `"Invalid Date"`, or throw an exception.
