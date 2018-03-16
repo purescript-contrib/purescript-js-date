@@ -63,3 +63,7 @@ exports.parse = function (dateString) {
     return new Date(dateString);
   };
 };
+
+exports.fromTime = function (time) {
+  return new Date(time);
+};

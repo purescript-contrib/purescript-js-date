@@ -60,6 +60,18 @@ main = do
   assert $ JSD.toDateTime (JSD.fromDateTime bottom) == Just bottom
   assert $ JSD.toDateTime (JSD.fromDateTime top) == Just top
 
+  log "Check that equal dates test equal"
+  assert $ JSD.fromDateTime dateTime == JSD.fromDateTime dateTime
+  assert $ JSD.fromDateTime ancientDateTime == JSD.fromDateTime ancientDateTime
+
+  log "Check that unequal dates do not test equal"
+  assert $ JSD.fromDateTime dateTime /= JSD.fromDateTime ancientDateTime
+
+  log "Check that dates are chronologically ordered"
+  assert $ JSD.fromDateTime dateTime `compare` JSD.fromDateTime dateTime == EQ
+  assert $ JSD.fromDateTime dateTime `compare` JSD.fromDateTime ancientDateTime == GT
+  assert $ JSD.fromDateTime ancientDateTime `compare` JSD.fromDateTime dateTime == LT
+
   log "All tests done"
 
   where
