@@ -20,7 +20,9 @@
     "purescript-exceptions": "^3.0.0",
     "purescript-foreign": "^4.0.0",
     "purescript-integers": "^3.0.0",
-    "purescript-now": "^3.0.0"
+    "purescript-now": "^3.0.0",
+    "purescript-generics-rep": "^5.4.0",
+    "purescript-foreign-generic": "^5.0.1"
   },
   "devDependencies": {
     "purescript-assert": "^3.0.0",
