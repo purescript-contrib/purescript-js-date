@@ -43,7 +43,6 @@ module Data.JSDate
   , toString
   , toTimeString
   , toUTCString
-  , fromTime
   ) where
 
 import Prelude
