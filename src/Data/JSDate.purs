@@ -79,7 +79,7 @@ instance ordJSDate :: Ord JSDate where
 instance showJSDate :: Show JSDate where
   show a = "(fromTime " <> show (getTime a) <> ")"
 
-instance genericJSDate :: Generic JSDate (Constructor "JSDate" (Argument Number)) where
+instance genericJSDate :: Generic JSDate (Constructor "fromTime" (Argument Number)) where
   to (Constructor (Argument time)) = fromTime time
   from x = Constructor (Argument (getTime x))
 
