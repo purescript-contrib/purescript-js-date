@@ -57,10 +57,7 @@ import Data.DateTime.Instant (Instant)
 import Data.DateTime.Instant as Instant
 import Data.Enum (fromEnum)
 import Data.Foreign (F, Foreign, unsafeReadTagged)
-import Data.Foreign.Class (class Encode, class Decode)
-import Data.Foreign.Generic as Fgn
 import Data.Function.Uncurried (Fn2, runFn2)
-import Data.Generic.Rep (class Generic, Argument(..), Constructor(..))
 import Data.Int (toNumber)
 import Data.Maybe (Maybe(..))
 import Data.Time as Time
@@ -77,16 +74,6 @@ instance ordJSDate :: Ord JSDate where
 
 instance showJSDate :: Show JSDate where
   show a = "(fromTime " <> show (getTime a) <> ")"
-
-instance genericJSDate :: Generic JSDate (Constructor "fromTime" (Argument Number)) where
-  to (Constructor (Argument time)) = fromTime time
-  from x = Constructor (Argument (getTime x))
-
-instance encodeJSDate :: Encode JSDate where
-  encode = Fgn.genericEncode Fgn.defaultOptions
-
-instance decodeJSDate :: Decode JSDate where
-  decode = Fgn.genericDecode Fgn.defaultOptions
 
 -- | The effect type used when indicating the current machine's date/time locale
 -- | is used in computing a value.
