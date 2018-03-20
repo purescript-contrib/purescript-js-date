@@ -43,6 +43,7 @@ module Data.JSDate
   , toString
   , toTimeString
   , toUTCString
+  , fromTime
   ) where
 
 import Prelude
@@ -65,6 +66,15 @@ import Data.Time.Duration (Milliseconds(..))
 
 -- | The type of JavaScript `Date` objects.
 foreign import data JSDate :: Type
+
+instance eqJSDate :: Eq JSDate where
+  eq a b = getTime a == getTime b
+
+instance ordJSDate :: Ord JSDate where
+  compare a b = getTime a `compare` getTime b
+
+instance showJSDate :: Show JSDate where
+  show a = "(fromTime " <> show (getTime a) <> ")"
 
 -- | The effect type used when indicating the current machine's date/time locale
 -- | is used in computing a value.
@@ -263,3 +273,6 @@ toTimeString dt = runFn2 dateMethod "toTimeString" dt
 -- | Returns the date as a string using the UTC timezone.
 toUTCString :: JSDate -> String
 toUTCString dt = runFn2 dateMethod "toUTCString" dt
+
+-- | Returns the date at a number of milliseconds since 1970-01-01 00:00:00 UTC.
+foreign import fromTime :: Number -> JSDate
