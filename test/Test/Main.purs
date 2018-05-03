@@ -2,25 +2,22 @@ module Test.Main where
 
 import Prelude
 
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
 import Control.Monad.Except (runExcept)
-
 import Data.DateTime as DT
-import Data.Enum (toEnum)
 import Data.Either (isRight)
-import Data.Foreign (F, Foreign)
+import Data.Enum (toEnum)
 import Data.JSDate as JSD
 import Data.Maybe (Maybe(..), fromJust)
-import Partial.Unsafe (unsafePartial)
-
+import Effect (Effect)
+import Effect.Console (log)
+import Foreign (F, Foreign)
 import Global (nan)
-
-import Test.Assert (ASSERT, assert)
+import Partial.Unsafe (unsafePartial)
+import Test.Assert (assert)
 
 foreign import myDate :: Foreign
 
-main :: forall eff. Eff (console :: CONSOLE, assert :: ASSERT, locale :: JSD.LOCALE | eff) Unit
+main :: Effect Unit
 main = do
 
   log "Checking that readDate will read JS date values..."
