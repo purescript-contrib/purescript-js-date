@@ -8,7 +8,6 @@
 -- | a `Generic` instance.
 module Data.JSDate
   ( JSDate
-  , LOCALE
   , readDate
   , isValid
   , fromDateTime
@@ -48,21 +47,19 @@ module Data.JSDate
 
 import Prelude
 
-import Control.Monad.Eff (kind Effect, Eff)
-import Control.Monad.Eff.Exception (EXCEPTION)
-import Control.Monad.Eff.Now (NOW)
 import Data.Date as Date
 import Data.DateTime (DateTime(..), Date)
 import Data.DateTime as DateTime
 import Data.DateTime.Instant (Instant)
 import Data.DateTime.Instant as Instant
 import Data.Enum (fromEnum)
-import Data.Foreign (F, Foreign, unsafeReadTagged)
 import Data.Function.Uncurried (Fn2, runFn2)
 import Data.Int (toNumber)
 import Data.Maybe (Maybe(..))
 import Data.Time as Time
 import Data.Time.Duration (Milliseconds(..))
+import Effect (Effect)
+import Foreign (F, Foreign, unsafeReadTagged)
 
 -- | The type of JavaScript `Date` objects.
 foreign import data JSDate :: Type
@@ -75,10 +72,6 @@ instance ordJSDate :: Ord JSDate where
 
 instance showJSDate :: Show JSDate where
   show a = "(fromTime " <> show (getTime a) <> ")"
-
--- | The effect type used when indicating the current machine's date/time locale
--- | is used in computing a value.
-foreign import data LOCALE :: Effect
 
 -- | Attempts to read a `Foreign` value as a `JSDate`.
 readDate :: Foreign -> F JSDate
@@ -142,8 +135,7 @@ foreign import jsdate
 -- | Constructs a new `JSDate` from component values using the current machine's
 -- | locale. If any of the values are `NaN` the resulting date will be invalid.
 foreign import jsdateLocal
-  :: forall eff
-   . { year :: Number
+  :: { year :: Number
      , month :: Number
      , day :: Number
      , hour :: Number
@@ -151,9 +143,9 @@ foreign import jsdateLocal
      , second :: Number
      , millisecond :: Number
      }
-  -> Eff (locale :: LOCALE | eff) JSDate
+  -> Effect JSDate
 
-foreign import dateMethodEff :: forall eff a. Fn2 String JSDate (Eff eff a)
+foreign import dateMethodEff :: forall a. Fn2 String JSDate (Effect a)
 foreign import dateMethod :: forall a. Fn2 String JSDate a
 
 -- | Attempts to parse a date from a string. The behaviour of this function is
@@ -163,15 +155,14 @@ foreign import dateMethod :: forall a. Fn2 String JSDate a
 -- |
 -- | The `LOCALE` effect is present here as if no time zone is specified in the
 -- | string the current locale's time zone will be used instead.
-foreign import parse
-  :: forall eff. String -> Eff (locale :: LOCALE | eff) JSDate
+foreign import parse :: String -> Effect JSDate
 
 -- | Gets a `JSDate` value for the date and time according to the current
 -- | machine's clock.
 -- |
 -- | Unless a `JSDate` is required specifically, consider using the functions in
--- | `Control.Monad.Eff.Now` instead.
-foreign import now :: forall eff. Eff (now :: NOW | eff) JSDate
+-- | `Effect.Now` instead.
+foreign import now :: Effect JSDate
 
 -- | Returns the date as a number of milliseconds since 1970-01-01 00:00:00 UTC.
 getTime :: JSDate -> Number
@@ -211,47 +202,47 @@ getUTCSeconds dt = runFn2 dateMethod "getUTCSeconds" dt
 
 -- | Returns the day of the month for a date, according to the current
 -- | machine's date/time locale.
-getDate :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getDate :: JSDate -> Effect Number
 getDate dt = runFn2 dateMethodEff "getDate" dt
 
 -- | Returns the day of the week for a date, according to the current
 -- | machine's date/time locale.
-getDay :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getDay :: JSDate -> Effect Number
 getDay dt = runFn2 dateMethodEff "getDay" dt
 
 -- | Returns the year for a date, according to the current machine's date/time
 -- | locale.
-getFullYear :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getFullYear :: JSDate -> Effect Number
 getFullYear dt = runFn2 dateMethodEff "getFullYear" dt
 
 -- | Returns the hour for a date, according to the current machine's date/time
 -- | locale.
-getHours :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getHours :: JSDate -> Effect Number
 getHours dt = runFn2 dateMethodEff "getHours" dt
 
 -- | Returns the milliseconds for a date, according to the current machine's
 -- | date/time locale.
-getMilliseconds :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getMilliseconds :: JSDate -> Effect Number
 getMilliseconds dt = runFn2 dateMethodEff "getMilliseconds" dt
 
 -- | Returns the minutes for a date, according to the current machine's
 -- | date/time locale.
-getMinutes :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getMinutes :: JSDate -> Effect Number
 getMinutes dt = runFn2 dateMethodEff "getMinutes" dt
 
 -- | Returns the month for a date, according to the current machine's
 -- | date/time locale.
-getMonth :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getMonth :: JSDate -> Effect Number
 getMonth dt = runFn2 dateMethodEff "getMonth" dt
 
 -- | Returns the seconds for a date, according to the current machine's
 -- | date/time locale.
-getSeconds :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getSeconds :: JSDate -> Effect Number
 getSeconds dt = runFn2 dateMethodEff "getSeconds" dt
 
 -- | Returns the time-zone offset for a date, according to the current machine's
 -- | date/time locale.
-getTimezoneOffset :: forall eff. JSDate -> Eff (locale :: LOCALE | eff) Number
+getTimezoneOffset :: JSDate -> Effect Number
 getTimezoneOffset dt = runFn2 dateMethodEff "getTimezoneOffset" dt
 
 -- | Returns the date portion of a date value as a human-readable string.
@@ -259,7 +250,7 @@ toDateString :: JSDate -> String
 toDateString dt = runFn2 dateMethod "toDateString" dt
 
 -- | Converts a date value to an ISO 8601 Extended format date string.
-toISOString :: forall eff. JSDate -> Eff (exception :: EXCEPTION | eff) String
+toISOString :: JSDate -> Effect String
 toISOString dt = runFn2 dateMethodEff "toISOString" dt
 
 -- | Returns a string representing for a date value.
