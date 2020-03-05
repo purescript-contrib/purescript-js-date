@@ -21,7 +21,7 @@ main :: Effect Unit
 main = do
 
   log "Checking that readDate will read JS date values..."
-  assert $ isRight $ runExcept $ JSD.readDate myDate :: F JSD.JSDate
+  assert $ isRight $ runExcept (JSD.readDate myDate :: F JSD.JSDate)
 
   log "Checking that a UTC date constructed with sensible values is valid..."
   assert $ JSD.isValid $ JSD.jsdate defaultDateRecord
