@@ -153,8 +153,8 @@ foreign import dateMethod :: forall a. Fn2 String JSDate a
 -- | behaviour for a given string. The RFC2822 and ISO8601 date string formats
 -- | should parse consistently.
 -- |
--- | The `LOCALE` effect is present here as if no time zone is specified in the
--- | string the current locale's time zone will be used instead.
+-- | This function is effectful in the sense that if no time zone is specified
+-- | in the string the current locale's time zone will be used instead.
 foreign import parse :: String -> Effect JSDate
 
 -- | Gets a `JSDate` value for the date and time according to the current
