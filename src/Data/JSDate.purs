@@ -150,8 +150,11 @@ foreign import dateMethod :: forall a. Fn2 String JSDate a
 
 -- | Attempts to parse a date from a string. The behaviour of this function is
 -- | implementation specific until ES5, so may not always have the same
--- | behaviour for a given string. The RFC2822 and ISO8601 date string formats
--- | should parse consistently.
+-- | behavior for a given string. For this reason, it is **strongly** encouraged
+-- | that you avoid this function if at all possible.
+-- |
+-- | If you must use it, the RFC2822 and ISO8601 date string formats should
+-- | parse consistently.
 -- |
 -- | This function is effectful because if no time zone is specified in the
 -- | string the current locale's time zone will be used instead.
