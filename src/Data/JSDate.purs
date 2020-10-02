@@ -148,7 +148,7 @@ foreign import jsdateLocal
 foreign import dateMethodEff :: forall a. Fn2 String JSDate (Effect a)
 foreign import dateMethod :: forall a. Fn2 String JSDate a
 
--- | Attempts to parse a date from a string. The behaviour of this function is
+-- | Attempts to parse a date from a string. The behavior of this function is
 -- | implementation specific until ES5, so may not always have the same
 -- | behavior for a given string. For this reason, it is **strongly** encouraged
 -- | that you avoid this function if at all possible.
