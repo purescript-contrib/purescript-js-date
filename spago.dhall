@@ -6,7 +6,7 @@
   , "effect"
   , "exceptions"
   , "foreign"
-  , "globals"
+  , "numbers"
   , "integers"
   , "now"
   , "psci-support"
