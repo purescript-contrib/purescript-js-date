@@ -11,7 +11,7 @@ import Data.Maybe (Maybe(..), fromJust)
 import Effect (Effect)
 import Effect.Console (log)
 import Foreign (F, Foreign)
-import Global (nan)
+import Data.Number (nan)
 import Partial.Unsafe (unsafePartial)
 import Test.Assert (assert)
 
