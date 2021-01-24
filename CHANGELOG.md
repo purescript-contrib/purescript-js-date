@@ -5,12 +5,17 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes (😱!!!):
+- Added support for PureScript 0.14 and dropped support for all previous versions (#28)
 
 New features:
 
 Bugfixes:
 
 Other improvements:
+- Updated docs for `parse` to discourage its use (#25)
+- Removed note about effect rows (#24)
+- Changed default branch to `main` from `master`
+- Updated to comply with Contributors library guidelines by adding new issue and pull request templates, updating documentation, and migrating to Spago for local development and CI (#26)
 
 ## [v6.0.0](https://github.com/purescript-contrib/purescript-js-date/releases/tag/v6.0.0) - 2018-05-25
 
@@ -18,7 +23,7 @@ Other improvements:
 
 ## [v5.2.0](https://github.com/purescript-contrib/purescript-js-date/releases/tag/v5.2.0) - 2018-03-20
 
-- Added instances for `Eq`, `Ord`, `Show` (@eric-corumdigital)
+- Added instances for `Eq`, `Ord`, and `Show` (@eric-corumdigital)
 
 ## [v5.1.0](https://github.com/purescript-contrib/purescript-js-date/releases/tag/v5.1.0) - 2017-07-16
 
