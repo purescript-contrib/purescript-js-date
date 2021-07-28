@@ -18,10 +18,8 @@
   "dependencies": {
     "purescript-datetime": "^5.0.0",
     "purescript-effect": "^3.0.0",
-    "purescript-exceptions": "^5.0.0",
     "purescript-foreign": "^6.0.0",
-    "purescript-integers": "^5.0.0",
-    "purescript-now": "^5.0.0"
+    "purescript-integers": "^5.0.0"
   },
   "devDependencies": {
     "purescript-assert": "^5.0.0",

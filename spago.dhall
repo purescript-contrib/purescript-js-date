@@ -4,12 +4,17 @@
   , "console"
   , "datetime"
   , "effect"
-  , "exceptions"
+  , "either"
+  , "enums"
   , "foreign"
-  , "numbers"
+  , "functions"
   , "integers"
-  , "now"
+  , "maybe"
+  , "numbers"
+  , "partial"
+  , "prelude"
   , "psci-support"
+  , "transformers"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
