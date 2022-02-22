@@ -1,3 +1,3 @@
 "use strict";
 
-export var myDate = new Date();
+export const myDate = new Date();
