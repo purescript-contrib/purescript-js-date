@@ -1,3 +1,3 @@
 "use strict";
 
-exports.myDate = new Date();
+export var myDate = new Date();
