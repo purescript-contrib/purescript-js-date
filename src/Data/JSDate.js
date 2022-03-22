@@ -1,6 +1,4 @@
 // global exports
-"use strict";
-
 var createDate = function(y, m, d, h, mi, s, ms) {
   var date = new Date(Date.UTC(y, m, d, h, mi, s, ms));
   if (y >= 0 && y < 100) {
@@ -17,28 +15,28 @@ var createLocalDate = function(y, m, d, h, mi, s, ms) {
   return date;
 };
 
-exports.now = function() {
+export function now() {
   return new Date();
-};
+}
 
-exports.isValid = function(date) {
+export function isValid(date) {
   return !isNaN(date.getTime());
-};
+}
 
-exports.toInstantImpl = function(just) {
+export function toInstantImpl(just) {
   return function(nothing) {
     return function(date) {
       var t = date.getTime();
       return isNaN(t) ? nothing : just(t);
     };
   };
-};
+}
 
-exports.fromInstant = function(instant) {
+export function fromInstant(instant) {
   return new Date(instant);
-};
+}
 
-exports.jsdate = function(parts) {
+export function jsdate(parts) {
   return createDate(
     parts.year,
     parts.month,
@@ -48,9 +46,9 @@ exports.jsdate = function(parts) {
     parts.second,
     parts.millisecond
   );
-};
+}
 
-exports.jsdateLocal = function(parts) {
+export function jsdateLocal(parts) {
   return function() {
     return createLocalDate(
       parts.year,
@@ -62,24 +60,24 @@ exports.jsdateLocal = function(parts) {
       parts.millisecond
     );
   };
-};
+}
 
-exports.dateMethod = function(method, date) {
+export function dateMethod(method, date) {
   return date[method]();
-};
+}
 
-exports.dateMethodEff = function(method, date) {
+export function dateMethodEff(method, date) {
   return function() {
     return date[method]();
   };
-};
+}
 
-exports.parse = function(dateString) {
+export function parse(dateString) {
   return function() {
     return new Date(dateString);
   };
-};
+}
 
-exports.fromTime = function(time) {
+export function fromTime(time) {
   return new Date(time);
-};
+}

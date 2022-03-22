@@ -16,14 +16,14 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-datetime": "^5.0.0",
-    "purescript-effect": "^3.0.0",
-    "purescript-foreign": "^6.0.0",
-    "purescript-integers": "^5.0.0"
+    "purescript-datetime": "master",
+    "purescript-effect": "master",
+    "purescript-foreign": "master",
+    "purescript-integers": "master"
   },
   "devDependencies": {
-    "purescript-assert": "^5.0.0",
-    "purescript-console": "^5.0.0",
-    "purescript-numbers": "^8.0.0"
+    "purescript-assert": "master",
+    "purescript-console": "master",
+    "purescript-numbers": "master"
   }
 }
