@@ -13,7 +13,6 @@
   , "numbers"
   , "partial"
   , "prelude"
-  , "psci-support"
   , "transformers"
   ]
 , packages = ./packages.dhall
