@@ -1,6 +1,4 @@
 // global exports
-"use strict";
-
 var createDate = function(y, m, d, h, mi, s, ms) {
   var date = new Date(Date.UTC(y, m, d, h, mi, s, ms));
   if (y >= 0 && y < 100) {
