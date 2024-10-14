@@ -1,0 +1,28 @@
+package:
+  name: js-date
+  description: PureScript library for native JavaScript `Date` values
+  publish:
+    license: MIT
+    version: 9.0.0
+    location:
+      githubOwner: purescript-contrib
+      githubRepo: purescript-js-date
+  dependencies:
+    - datetime: ">=6.1.0 <7.0.0"
+    - effect: ">=4.0.0 <5.0.0"
+    - enums: ">=6.0.1 <7.0.0"
+    - foreign: ">=7.0.0 <8.0.0"
+    - functions: ">=6.0.0 <7.0.0"
+    - integers: ">=6.0.0 <7.0.0"
+    - maybe: ">=6.0.0 <7.0.0"
+    - prelude: ">=6.0.1 <7.0.0"
+  test:
+    main: Test.Main
+    dependencies:
+      - assert
+      - console
+      - either
+      - numbers
+      - partial
+      - transformers
+workspace: {}
