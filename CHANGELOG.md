@@ -11,6 +11,7 @@ New features:
 Bugfixes:
 
 Other improvements:
+- Migrate development and CI to registry-backed Spago, preserving published dependency bounds.
 
 ## [v8.0.0](https://github.com/purescript-contrib/purescript-js-date/releases/tag/v8.0.0) - 2022-04-27
 
