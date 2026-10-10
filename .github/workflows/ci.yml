@@ -11,25 +11,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v2
 
       - name: Set up Node toolchain
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v2
         with:
-          node-version: "24"
-          cache: npm
+          node-version: "24.x"
+
+      - name: Set up PureScript toolchain
+        uses: purescript-contrib/setup-purescript@main
+        with:
+          purescript: "0.15.16"
+          spago: "1.0.4"
+          purs-tidy: "0.11.1"
+
+      - name: Cache PureScript dependencies
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-spago-${{ hashFiles('spago.yaml', 'spago.lock', '.github/workflows/ci.yml') }}
+          path: |
+            .spago
+            output
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Lint JavaScript
-        run: npm run lint
+        run: npm install
 
       - name: Build the project
         run: npm run build
 
       - name: Run tests
-        run: npm test
+        run: npm run test
 
       - name: Check formatting
-        run: npm run format:check
+        run: purs-tidy check src test

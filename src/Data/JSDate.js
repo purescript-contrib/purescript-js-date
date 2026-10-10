@@ -1,5 +1,5 @@
 // global exports
-var createDate = function (y, m, d, h, mi, s, ms) {
+var createDate = function(y, m, d, h, mi, s, ms) {
   var date = new Date(Date.UTC(y, m, d, h, mi, s, ms));
   if (y >= 0 && y < 100) {
     date.setUTCFullYear(y);
@@ -7,7 +7,7 @@ var createDate = function (y, m, d, h, mi, s, ms) {
   return date;
 };
 
-var createLocalDate = function (y, m, d, h, mi, s, ms) {
+var createLocalDate = function(y, m, d, h, mi, s, ms) {
   var date = new Date(y, m, d, h, mi, s, ms);
   if (y >= 0 && y < 100) {
     date.setFullYear(y);
@@ -24,8 +24,8 @@ export function isValid(date) {
 }
 
 export function toInstantImpl(just) {
-  return function (nothing) {
-    return function (date) {
+  return function(nothing) {
+    return function(date) {
       var t = date.getTime();
       return isNaN(t) ? nothing : just(t);
     };
@@ -49,7 +49,7 @@ export function jsdate(parts) {
 }
 
 export function jsdateLocal(parts) {
-  return function () {
+  return function() {
     return createLocalDate(
       parts.year,
       parts.month,
@@ -67,13 +67,13 @@ export function dateMethod(method, date) {
 }
 
 export function dateMethodEff(method, date) {
-  return function () {
+  return function() {
     return date[method]();
   };
 }
 
 export function parse(dateString) {
-  return function () {
+  return function() {
     return new Date(dateString);
   };
 }
