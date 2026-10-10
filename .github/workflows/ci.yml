@@ -21,9 +21,8 @@ jobs:
       - name: Set up PureScript toolchain
         uses: purescript-contrib/setup-purescript@main
         with:
-          purescript: "0.15.16"
-          spago: "1.0.4"
-          purs-tidy: "0.11.1"
+          purescript: "unstable"
+          purs-tidy: "latest"
 
       - name: Cache PureScript dependencies
         uses: actions/cache@v4
