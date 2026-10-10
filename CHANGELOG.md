@@ -11,6 +11,16 @@ New features:
 Bugfixes:
 
 Other improvements:
+
+## [v8.0.1](https://github.com/purescript-contrib/purescript-js-date/releases/tag/v8.0.1) - 2026-10-10
+
+Breaking changes:
+
+New features:
+
+Bugfixes:
+
+Other improvements:
 - Migrate development and CI to registry-backed Spago, preserving published dependency bounds.
 - Update ESLint and CI actions, retaining the existing lint rules and moving PureScript toolchain selectors.
 
