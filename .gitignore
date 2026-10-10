@@ -3,10 +3,9 @@
 !.github
 !.editorconfig
 !.tidyrc.json
-!.eslintrc.json
+!.oxfmtrc.json
 
 output
 generated-docs
-bower_components
 
 node_modules
